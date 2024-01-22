@@ -128,8 +128,28 @@ function properConcatonate(str) {
 
 
 
+function maximumSubarraySum(nums, k) {
+    let maxSum = 0;
+    let tempSum = 0;
+    let numFrequency = {};
+    
+    let pointer1 = 0;
+    let pointer2 = k;
 
 
+    while (pointer2 < nums.length) {
+        if (nums[pointer2] !== nums[pointer1 + 1] && nums[pointer2] !== nums[pointer2 - 1]) {
+            tempSum = tempSum - nums[pointer1] + nums[pointer2]
+        }
+        maxSum = Math.max(tempSum, maxSum);
 
+        pointer1++;
+        pointer2++
+    }
+
+    return maxSum;
+};
+
+console.log(maximumSubarraySum([1,5,4,2,9,9,9], 3))
 
 
