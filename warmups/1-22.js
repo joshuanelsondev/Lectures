@@ -129,19 +129,51 @@ function properConcatonate(str) {
 
 
 function maximumSubarraySum(nums, k) {
+    if (nums.length < k) return 0;
     let maxSum = 0;
     let tempSum = 0;
+    let duplicates = 0;
     let numFrequency = {};
     
+    for (let i = 0; i< k; i++) {
+;
+        if (numFrequency[nums[i]]) {
+            duplicates++;
+            numFrequency[nums[i]]++;
+        } else {
+            numFrequency[nums[i]] = 1;
+        }
+
+        tempSum += nums[i]
+    }
+
+    if (duplicates === 0) {
+        maxSum = tempSum;
+    }
+
     let pointer1 = 0;
     let pointer2 = k;
 
 
     while (pointer2 < nums.length) {
-        if (nums[pointer2] !== nums[pointer1 + 1] && nums[pointer2] !== nums[pointer2 - 1]) {
-            tempSum = tempSum - nums[pointer1] + nums[pointer2]
+
+        if (numFrequency[nums[pointer2]]) {
+            duplicates++
+            numFrequency[nums[pointer2]]++
+        } else {
+            numFrequency[nums[pointer2]] = 1;
         }
-        maxSum = Math.max(tempSum, maxSum);
+
+        tempSum = tempSum - nums[pointer1] + nums[pointer2];
+        numFrequency[nums[pointer1]]--;
+
+        if (numFrequency[nums[pointer1]] > 0) {
+            duplicates--;
+        }
+
+        if (duplicates === 0) {
+            maxSum = Math.max(tempSum, maxSum); 
+        }
 
         pointer1++;
         pointer2++
@@ -150,6 +182,16 @@ function maximumSubarraySum(nums, k) {
     return maxSum;
 };
 
-console.log(maximumSubarraySum([1,5,4,2,9,9,9], 3))
+
+// console.log(maximumSubarraySum([1,5,4,2,9,9,9], 3))
+// console.log(maximumSubarraySum([4,4,4], 3))
+// console.log(maximumSubarraySum([9,9,9,1,2,3], 3))
+// console.log(maximumSubarraySum([9,9], 3))
+// console.log(maximumSubarraySum([], 3))
+// console.log(maximumSubarraySum([1,2,3,3,3,3,4,5,6], 3))
+// console.log(maximumSubarraySum([1,2,2], 2))
+// console.log(maximumSubarraySum([5,3,3,1,1], 3))
+// console.log(maximumSubarraySum([3,3,3,1,2], 4))
+
 
 
