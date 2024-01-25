@@ -30,7 +30,7 @@ function twoSumPair(nums, target) {
 
 // Example
 console.log(twoSumPair([1, 2, 3, 4, 5], 9));  // Should return [4, 5]
-console.log(twoSumPair([-2, 0, 2, 5, 7], 5));  // Should return [0, 5]
+console.log(twoSumPair([-2, 0, 2, 5, 7], 5));  // Should return [-2, 7]
 
 
 
